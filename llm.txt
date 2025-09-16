@@ -1,0 +1,45 @@
+# Codebase Conventions
+
+This document outlines the established conventions for this project based on an analysis of the existing codebase.
+
+## Naming Conventions
+
+- **Variables & Functions:** Use `camelCase`.
+  - *Example:* `codeReviewAgent`, `fileChange`
+
+- **Constants:** Use `UPPER_SNAKE_CASE` for top-level or exported constants.
+  - *Example:* `SYSTEM_PROMPT`
+
+- **Types & Interfaces:** Use `PascalCase`.
+  - *Example:* `type FileChange = ...`
+
+- **Files:** Use `camelCase` for TypeScript files.
+  - *Example:* `index.ts`, `prompts.ts`, `tools.ts`
+
+## API Conventions
+
+- **AI Tools:**
+  - Define tools using the `tool` function from the `ai` library.
+  - Each tool definition must include:
+    1.  A clear `description` of its purpose.
+    2.  An `inputSchema` defined with `zod` for validation.
+    3.  An `execute` function containing the tool's logic.
+  - Export tools for use in the main application logic.
+    - *Example:* `export const getFileChangesInDirectoryTool = tool({...})`
+
+- **Modularity:**
+  - The main application entry point is `index.ts`.
+  - Reusable components, like AI tools or prompts, should be in separate, descriptively named files (e.g., `tools.ts`, `prompts.ts`).
+
+## Folder Structure
+
+The project follows a flat structure for source files.
+
+- **Root Directory:**
+  - `/index.ts`: Main application entry point.
+  - `/*.ts`: Other source files (e.g., `tools.ts`, `prompts.ts`).
+  - `/package.json`: Project dependencies and scripts.
+  - `/tsconfig.json`: TypeScript configuration.
+  - `/bun.lock`: Bun lockfile.
+  - `/.gitignore`: Git ignore file.
+  - `/node_modules/`: Project dependencies.
